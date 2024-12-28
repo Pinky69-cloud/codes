@@ -1,0 +1,168 @@
+public class NumberProperties {
+
+    public static void main(String[] args) {
+        int[] numbers = {2, 3, 4, 5, 6, 10, 11, 121, 153, 28, 496, 1001, 12321};
+
+        System.out.println("Prime Numbers:");
+        for (int num : numbers) {
+            boolean isPrime = true;
+            if (num <= 1) isPrime = false;
+            for (int i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) System.out.println(num);
+        }
+
+        System.out.println("\nEven Numbers:");
+        for (int num : numbers) {
+            if (num % 2 == 0) {
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("\nOdd Numbers:");
+        for (int num : numbers) {
+            if (num % 2 != 0) {
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("\nPalindrome Numbers:");
+        for (int num : numbers) {
+            int originalNum = num;
+            int reversedNum = 0;
+            while (num != 0) {
+                reversedNum = reversedNum * 10 + num % 10;
+                num /= 10;
+            }
+            if (originalNum == reversedNum) {
+                System.out.println(originalNum);
+            }
+        }
+
+        System.out.println("\nPerfect Numbers:");
+        for (int num : numbers) {
+            if (num <= 1) continue;
+            int sum = 0;
+            for (int i = 1; i <= num / 2; i++) {
+                if (num % i == 0) {
+                    sum += i;
+                }
+            }
+            if (sum == num) {
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("\nArmstrong Numbers:");
+        for (int num : numbers) {
+            int originalNum = num;
+            int sum = 0;
+            int digits = (int) Math.log10(num) + 1;
+            while (num != 0) {
+                int digit = num % 10;
+                sum += Math.pow(digit, digits);
+                num /= 10;
+            }
+            if (sum == originalNum) {
+                System.out.println(originalNum);
+            }
+        }
+
+        System.out.println("\nFibonacci Numbers:");
+        for (int num : numbers) {
+            int x1 = 5 * num * num + 4;
+            int x2 = 5 * num * num - 4;
+            int sqrt1 = (int) Math.sqrt(x1);
+            int sqrt2 = (int) Math.sqrt(x2);
+            if (sqrt1 * sqrt1 == x1 || sqrt2 * sqrt2 == x2) {
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("\nHarshad Numbers:");
+        for (int num : numbers) {
+            int sumOfDigits = 0, originalNum = num;
+            while (num != 0) {
+                sumOfDigits += num % 10;
+                num /= 10;
+            }
+            if (originalNum % sumOfDigits == 0) {
+                System.out.println(originalNum);
+            }
+        }
+
+        System.out.println("\nStrong Numbers:");
+        for (int num : numbers) {
+            int originalNum = num, sum = 0;
+            while (num != 0) {
+                int digit = num % 10;
+                int fact = 1;
+                for (int i = 1; i <= digit; i++) {
+                    fact *= i;
+                }
+                sum += fact;
+                num /= 10;
+            }
+            if (sum == originalNum) {
+                System.out.println(originalNum);
+            }
+        }
+
+        System.out.println("\nTriangular Numbers:");
+        for (int num : numbers) {
+            int x = (int) Math.sqrt(2 * num);
+            if (x * (x + 1) / 2 == num) {
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("\nDecagonal Numbers:");
+        for (int num : numbers) {
+            int x = (int) Math.sqrt(2 * num);
+            if (x * (3 * x - 1) / 2 == num) {
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("\nKaprekar Numbers:");
+        for (int num : numbers) {
+            int square = num * num;
+            int numDigits = (int) Math.log10(num) + 1;
+            int rightPart = square % (int) Math.pow(10, numDigits);
+            int leftPart = square / (int) Math.pow(10, numDigits);
+            if (leftPart + rightPart == num) {
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("\nSmith Numbers:");
+        for (int num : numbers) {
+            if (num < 2) continue;
+            int digitSum = 0, originalNum = num;
+            while (num != 0) {
+                digitSum += num % 10;
+                num /= 10;
+            }
+            int primeFactorSum = 0;
+            for (int i = 2; i <= originalNum; i++) {
+                while (originalNum % i == 0) {
+                    int factorSum = 0;
+                    int factor = i;
+                    while (factor != 0) {
+                        factorSum += factor % 10;
+                        factor /= 10;
+                    }
+                    primeFactorSum += factorSum;
+                    originalNum /= i;
+                }
+            }
+            if (digitSum == primeFactorSum) {
+                System.out.println(originalNum);
+            }
+        }
+    }
+}
